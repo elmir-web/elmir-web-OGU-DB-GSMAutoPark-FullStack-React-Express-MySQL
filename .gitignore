@@ -1,0 +1,26 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/react-client/node_modules
+/react-client/.pnp
+/react-client/.pnp.js
+
+# testing
+/react-client/coverage
+
+# production
+/react-client/build
+
+# misc
+/react-client/.DS_Store
+/react-client/.env.local
+/react-client/.env.development.local
+/react-client/.env.test.local
+/react-client/.env.production.local
+
+/react-client/npm-debug.log*
+/react-client/yarn-debug.log*
+/react-client/yarn-error.log*
+
+# express
+/express-server/node_modules
