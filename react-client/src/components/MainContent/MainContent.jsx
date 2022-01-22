@@ -37,9 +37,15 @@ function MainContent() {
     <div className="MainContent">
       <Routes>
         <Route path="/" element={<AutoBases funcRequest={funcRequest} />} />
-        <Route path="/type-gsm" element={<TypesGSM />} />
-        <Route path="/autogarages" element={<AutoGarages />} />
-        <Route path="/autos" element={<Autos />} />
+        <Route
+          path="/type-gsm"
+          element={<TypesGSM funcRequest={funcRequest} />}
+        />
+        <Route
+          path="/autogarages"
+          element={<AutoGarages funcRequest={funcRequest} />}
+        />
+        <Route path="/autos" element={<Autos funcRequest={funcRequest} />} />
         <Route path="/workers" element={<Workers />} />
         <Route path="/sheets" element={<Sheets />} />
         <Route path="/records" element={<Records />} />

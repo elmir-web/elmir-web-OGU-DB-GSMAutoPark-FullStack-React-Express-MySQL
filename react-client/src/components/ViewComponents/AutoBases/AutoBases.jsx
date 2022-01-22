@@ -6,6 +6,7 @@ function AutoBases({ funcRequest }) {
   let [allAutoBases, setAutoBases] = useState([]);
   let [changedAutoBase, setChangedAutoBase] = useState(null);
   let [inputNameAutoBase, setInputNameAutoBase] = useState("");
+  let [createNameAutoBase, setCreateNameAutoBase] = useState("");
 
   // eslint-disable-next-line no-use-before-define
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,6 +66,7 @@ function AutoBases({ funcRequest }) {
                   <td>{itemAutoBase.Name}</td>
                   <td>
                     <button
+                      className="button-table"
                       onClick={() => {
                         deleteAutoBase(itemAutoBase);
                       }}
@@ -72,6 +74,7 @@ function AutoBases({ funcRequest }) {
                       Удалить
                     </button>
                     <button
+                      className="button-table"
                       onClick={() => {
                         beginUpdateAutoBase(itemAutoBase);
                       }}
@@ -94,6 +97,7 @@ function AutoBases({ funcRequest }) {
               {changedAutoBase.Name}
             </h4>
             <input
+              className="input-write"
               value={inputNameAutoBase}
               onChange={(e) => {
                 setInputNameAutoBase(e.target.value);
@@ -102,6 +106,7 @@ function AutoBases({ funcRequest }) {
               placeholder="Введите название автомобильной базы"
             />
             <button
+              className="button-modify"
               onClick={async () => {
                 let tempChanged = {
                   ...changedAutoBase,
@@ -127,6 +132,44 @@ function AutoBases({ funcRequest }) {
         ) : (
           ""
         )}
+      </div>
+
+      <div className="created-wrapper">
+        <h4>
+          Создать автомобильную базу
+          {createNameAutoBase !== ""
+            ? ` - Название новой автомобильной базы: ${createNameAutoBase}`
+            : ""}
+        </h4>
+        <input
+          className="input-write"
+          value={createNameAutoBase}
+          onChange={(e) => {
+            setCreateNameAutoBase(e.target.value);
+          }}
+          type="text"
+          placeholder="Введите название новой автомобильной базы"
+        />
+        <button
+          className="button-modify"
+          onClick={async () => {
+            const message = await funcRequest(
+              `http://localhost:8080/api/autobase/`,
+              "POST",
+              {
+                Name: createNameAutoBase,
+              }
+            );
+
+            setCreateNameAutoBase("");
+
+            window.alert(message);
+
+            loadAutoBases();
+          }}
+        >
+          Создать
+        </button>
       </div>
     </div>
   );
