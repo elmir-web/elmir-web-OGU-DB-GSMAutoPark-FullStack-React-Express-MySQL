@@ -11,6 +11,9 @@ const autoBaseRouter = require("./routes/autobase.router");
 const typesGSMrouter = require("./routes/typesGSM.router");
 const autoGarageRouter = require("./routes/autoGarageRouter");
 const vehicleRouter = require("./routes/vehicle.router");
+const workersRouter = require("./routes/worker.router");
+const sheetRouter = require("./routes/sheet.router");
+const recordRouter = require("./routes/record.router");
 
 global.funcRequest = async (url, method = "GET", data = null) => {
   try {
@@ -49,3 +52,6 @@ app.use("/api", autoBaseRouter);
 app.use("/api", typesGSMrouter);
 app.use("/api", autoGarageRouter);
 app.use("/api", vehicleRouter);
+app.use("/api", workersRouter);
+app.use("/api", sheetRouter);
+app.use("/api", recordRouter);

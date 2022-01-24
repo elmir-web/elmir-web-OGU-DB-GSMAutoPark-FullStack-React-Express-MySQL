@@ -80,35 +80,41 @@ function AutoGarages({ funcRequest }) {
             </tr>
           </thead>
           <tbody>
-            {allAutoGarages.map((autogarage) => {
-              return (
-                <tr key={autogarage.ID}>
-                  <td>{autogarage.ID}</td>
-                  <td>{autogarage.Name}</td>
-                  <td>
-                    {autogarage.IDbase.Name} ({autogarage.IDbase.ID})
-                  </td>
-                  <td>
-                    <button
-                      className="button-table"
-                      onClick={() => {
-                        deleteAutoGarage(autogarage);
-                      }}
-                    >
-                      Удалить
-                    </button>
-                    <button
-                      className="button-table"
-                      onClick={() => {
-                        beginUpdateAutoGaraga(autogarage);
-                      }}
-                    >
-                      Изменить
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {allAutoGarages.length ? (
+              allAutoGarages.map((autogarage) => {
+                return (
+                  <tr key={autogarage.ID}>
+                    <td>{autogarage.ID}</td>
+                    <td>{autogarage.Name}</td>
+                    <td>
+                      {autogarage.IDbase.Name} ({autogarage.IDbase.ID})
+                    </td>
+                    <td>
+                      <button
+                        className="button-table"
+                        onClick={() => {
+                          deleteAutoGarage(autogarage);
+                        }}
+                      >
+                        Удалить
+                      </button>
+                      <button
+                        className="button-table"
+                        onClick={() => {
+                          beginUpdateAutoGaraga(autogarage);
+                        }}
+                      >
+                        Изменить
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colspan="4">Автомобильные гаражи не найдены</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

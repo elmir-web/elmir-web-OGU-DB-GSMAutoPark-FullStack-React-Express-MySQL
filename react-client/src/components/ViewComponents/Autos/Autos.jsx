@@ -84,36 +84,42 @@ function Autos({ funcRequest }) {
             </tr>
           </thead>
           <tbody>
-            {allVehicles.map((veh) => {
-              return (
-                <tr key={veh.ID}>
-                  <td>{veh.ID}</td>
-                  <td>{veh.Model}</td>
-                  <td>{veh.Number}</td>
-                  <td>
-                    {veh.IDgarage.Name} ({veh.IDgarage.ID})
-                  </td>
-                  <td>
-                    <button
-                      className="button-table"
-                      onClick={() => {
-                        deleteVehicle(veh);
-                      }}
-                    >
-                      Удалить
-                    </button>
-                    <button
-                      className="button-table"
-                      onClick={() => {
-                        beginUpdateVeh(veh);
-                      }}
-                    >
-                      Изменить
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {allVehicles.length ? (
+              allVehicles.map((veh) => {
+                return (
+                  <tr key={veh.ID}>
+                    <td>{veh.ID}</td>
+                    <td>{veh.Model}</td>
+                    <td>{veh.Number}</td>
+                    <td>
+                      {veh.IDgarage.Name} ({veh.IDgarage.ID})
+                    </td>
+                    <td>
+                      <button
+                        className="button-table"
+                        onClick={() => {
+                          deleteVehicle(veh);
+                        }}
+                      >
+                        Удалить
+                      </button>
+                      <button
+                        className="button-table"
+                        onClick={() => {
+                          beginUpdateVeh(veh);
+                        }}
+                      >
+                        Изменить
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colspan="5">Автомобили не найдены</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

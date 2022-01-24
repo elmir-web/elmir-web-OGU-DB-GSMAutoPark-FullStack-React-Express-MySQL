@@ -59,32 +59,38 @@ function AutoBases({ funcRequest }) {
           </thead>
           <tbody>
             {/* eslint-disable-next-line array-callback-return */}
-            {allAutoBases.map((itemAutoBase) => {
-              return (
-                <tr key={itemAutoBase.ID}>
-                  <td>{itemAutoBase.ID}</td>
-                  <td>{itemAutoBase.Name}</td>
-                  <td>
-                    <button
-                      className="button-table"
-                      onClick={() => {
-                        deleteAutoBase(itemAutoBase);
-                      }}
-                    >
-                      Удалить
-                    </button>
-                    <button
-                      className="button-table"
-                      onClick={() => {
-                        beginUpdateAutoBase(itemAutoBase);
-                      }}
-                    >
-                      Изменить
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {allAutoBases.length ? (
+              allAutoBases.map((itemAutoBase) => {
+                return (
+                  <tr key={itemAutoBase.ID}>
+                    <td>{itemAutoBase.ID}</td>
+                    <td>{itemAutoBase.Name}</td>
+                    <td>
+                      <button
+                        className="button-table"
+                        onClick={() => {
+                          deleteAutoBase(itemAutoBase);
+                        }}
+                      >
+                        Удалить
+                      </button>
+                      <button
+                        className="button-table"
+                        onClick={() => {
+                          beginUpdateAutoBase(itemAutoBase);
+                        }}
+                      >
+                        Изменить
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colspan="3">Автомобильные базы не найдены</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

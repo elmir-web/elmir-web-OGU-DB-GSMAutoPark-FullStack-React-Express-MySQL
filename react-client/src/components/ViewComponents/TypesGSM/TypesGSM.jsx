@@ -73,33 +73,39 @@ function TypesGSM({ funcRequest }) {
             </tr>
           </thead>
           <tbody>
-            {allTypesGSM.map((itemGsm) => {
-              return (
-                <tr key={itemGsm.ID}>
-                  <td>{itemGsm.ID}</td>
-                  <td>{itemGsm.Name}</td>
-                  <td>{itemGsm.ForKilo}</td>
-                  <td>
-                    <button
-                      className="button-table"
-                      onClick={() => {
-                        deleteTypeGSM(itemGsm);
-                      }}
-                    >
-                      Удалить
-                    </button>
-                    <button
-                      className="button-table"
-                      onClick={() => {
-                        beginUpdateGSM(itemGsm);
-                      }}
-                    >
-                      Изменить
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {allTypesGSM.length ? (
+              allTypesGSM.map((itemGsm) => {
+                return (
+                  <tr key={itemGsm.ID}>
+                    <td>{itemGsm.ID}</td>
+                    <td>{itemGsm.Name}</td>
+                    <td>{itemGsm.ForKilo}</td>
+                    <td>
+                      <button
+                        className="button-table"
+                        onClick={() => {
+                          deleteTypeGSM(itemGsm);
+                        }}
+                      >
+                        Удалить
+                      </button>
+                      <button
+                        className="button-table"
+                        onClick={() => {
+                          beginUpdateGSM(itemGsm);
+                        }}
+                      >
+                        Изменить
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colspan="4">Виды ГСМ не найдены</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

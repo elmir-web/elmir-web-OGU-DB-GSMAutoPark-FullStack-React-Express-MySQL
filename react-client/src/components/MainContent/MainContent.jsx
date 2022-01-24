@@ -46,9 +46,15 @@ function MainContent() {
           element={<AutoGarages funcRequest={funcRequest} />}
         />
         <Route path="/autos" element={<Autos funcRequest={funcRequest} />} />
-        <Route path="/workers" element={<Workers />} />
-        <Route path="/sheets" element={<Sheets />} />
-        <Route path="/records" element={<Records />} />
+        <Route
+          path="/workers"
+          element={<Workers funcRequest={funcRequest} />}
+        />
+        <Route path="/sheets" element={<Sheets funcRequest={funcRequest} />} />
+        <Route
+          path="/records"
+          element={<Records funcRequest={funcRequest} />}
+        />
 
         {/* <Route path="/" element={<AutoBases />} /> */}
         {/* <Route path="/" element={<AutoBases />} /> */}
