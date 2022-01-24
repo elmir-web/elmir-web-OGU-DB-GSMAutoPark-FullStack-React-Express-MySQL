@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import "./MainContent.scss";
 
@@ -9,6 +9,9 @@ import Autos from "./../ViewComponents/Autos/Autos";
 import Workers from "./../ViewComponents/Workers/Workers";
 import Sheets from "./../ViewComponents/Sheets/Sheets";
 import Records from "./../ViewComponents/Records/Records";
+
+import GSMDayGarage from "../ViewComponents/GSMDayGarage/GSMDayGarage.jsx";
+import ReportSheet from "../ViewComponents/ReportSheet/ReportSheet.jsx";
 
 const funcRequest = async (url, method = "GET", data = null) => {
   try {
@@ -56,8 +59,14 @@ function MainContent() {
           element={<Records funcRequest={funcRequest} />}
         />
 
-        {/* <Route path="/" element={<AutoBases />} /> */}
-        {/* <Route path="/" element={<AutoBases />} /> */}
+        <Route
+          path="/gsm-day-garage"
+          element={<GSMDayGarage funcRequest={funcRequest} />}
+        />
+        <Route
+          path="/sheet-report"
+          element={<ReportSheet funcRequest={funcRequest} />}
+        />
       </Routes>
     </div>
   );

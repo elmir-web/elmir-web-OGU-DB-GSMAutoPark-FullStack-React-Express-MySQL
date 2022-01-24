@@ -118,7 +118,7 @@ function Workers({ funcRequest }) {
               })
             ) : (
               <tr>
-                <td colspan="5">Рабочий персонал не найден</td>
+                <td colSpan="5">Рабочий персонал не найден</td>
               </tr>
             )}
           </tbody>

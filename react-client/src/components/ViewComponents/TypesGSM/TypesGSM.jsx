@@ -103,7 +103,7 @@ function TypesGSM({ funcRequest }) {
               })
             ) : (
               <tr>
-                <td colspan="4">Виды ГСМ не найдены</td>
+                <td colSpan="4">Виды ГСМ не найдены</td>
               </tr>
             )}
           </tbody>

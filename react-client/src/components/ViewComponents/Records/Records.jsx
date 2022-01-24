@@ -156,7 +156,7 @@ function Records({ funcRequest }) {
               })
             ) : (
               <tr>
-                <td colspan="8">Путевых листов не найдено</td>
+                <td colSpan="8">Путевых листов не найдено</td>
               </tr>
             )}
           </tbody>

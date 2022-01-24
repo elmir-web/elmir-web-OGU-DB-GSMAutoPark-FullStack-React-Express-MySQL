@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./Navigation.scss";
 
@@ -13,6 +13,9 @@ function Navigation() {
         <Link to="/workers">Рабочий персонал</Link>
         <Link to="/sheets">Ведомости</Link>
         <Link to="/records">Путевые листы</Link>
+        <br />
+        <Link to="/gsm-day-garage">ГСМ за день по гаражу</Link>
+        <Link to="/sheet-report">Отчет по ведомостям</Link>
       </nav>
     </div>
   );

@@ -117,7 +117,7 @@ function Autos({ funcRequest }) {
               })
             ) : (
               <tr>
-                <td colspan="5">Автомобили не найдены</td>
+                <td colSpan="5">Автомобили не найдены</td>
               </tr>
             )}
           </tbody>

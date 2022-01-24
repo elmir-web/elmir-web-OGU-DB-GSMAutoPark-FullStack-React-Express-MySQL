@@ -135,7 +135,7 @@ function Sheets({ funcRequest }) {
               })
             ) : (
               <tr>
-                <td colspan="6">Ведомости не найдены</td>
+                <td colSpan="6">Ведомости не найдены</td>
               </tr>
             )}
           </tbody>

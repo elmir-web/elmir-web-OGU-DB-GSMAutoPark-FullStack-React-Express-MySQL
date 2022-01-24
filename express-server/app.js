@@ -14,6 +14,7 @@ const vehicleRouter = require("./routes/vehicle.router");
 const workersRouter = require("./routes/worker.router");
 const sheetRouter = require("./routes/sheet.router");
 const recordRouter = require("./routes/record.router");
+const reportRouter = require("./routes/report.router");
 
 global.funcRequest = async (url, method = "GET", data = null) => {
   try {
@@ -55,3 +56,4 @@ app.use("/api", vehicleRouter);
 app.use("/api", workersRouter);
 app.use("/api", sheetRouter);
 app.use("/api", recordRouter);
+app.use("/api", reportRouter);

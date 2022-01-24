@@ -112,7 +112,7 @@ function AutoGarages({ funcRequest }) {
               })
             ) : (
               <tr>
-                <td colspan="4">Автомобильные гаражи не найдены</td>
+                <td colSpan="4">Автомобильные гаражи не найдены</td>
               </tr>
             )}
           </tbody>

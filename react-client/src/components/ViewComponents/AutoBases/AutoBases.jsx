@@ -88,7 +88,7 @@ function AutoBases({ funcRequest }) {
               })
             ) : (
               <tr>
-                <td colspan="3">Автомобильные базы не найдены</td>
+                <td colSpan="3">Автомобильные базы не найдены</td>
               </tr>
             )}
           </tbody>
