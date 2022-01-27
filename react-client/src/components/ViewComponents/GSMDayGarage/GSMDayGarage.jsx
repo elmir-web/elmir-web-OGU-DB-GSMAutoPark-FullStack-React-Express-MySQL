@@ -16,9 +16,7 @@ function GSMDayGarage({ funcRequest }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function loadComponent() {
-    const autoGarages = await funcRequest(
-      `http://localhost:8080/api/autogarage/`
-    );
+    const autoGarages = await funcRequest(`/api/autogarage/`);
 
     setAutoGarages(autoGarages);
   }
@@ -73,7 +71,7 @@ function GSMDayGarage({ funcRequest }) {
               setDivGarageHidden(true);
 
               const sheets = await funcRequest(
-                `http://localhost:8080/api/gsm-day-garage/get-sheet/${garageSelected}`
+                `/api/gsm-day-garage/get-sheet/${garageSelected}`
               );
 
               setSheetsToGarage(sheets);
@@ -119,7 +117,7 @@ function GSMDayGarage({ funcRequest }) {
               setDivTableReport(true);
 
               const report = await funcRequest(
-                `http://localhost:8080/api/gsm-day-garage/get-report`,
+                `/api/gsm-day-garage/get-report`,
                 "POST",
                 { garageID: garageSelected, date: sheetSelected }
               );

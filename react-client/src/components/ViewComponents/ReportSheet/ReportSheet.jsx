@@ -12,7 +12,7 @@ function ReportSheet({ funcRequest }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function loadComponent() {
-    const sheets = await funcRequest(`http://localhost:8080/api/sheet/`);
+    const sheets = await funcRequest(`/api/sheet/`);
 
     setSheets(sheets);
   }
@@ -56,7 +56,7 @@ function ReportSheet({ funcRequest }) {
               setDivSheetHidden(true);
 
               const report = await funcRequest(
-                `http://localhost:8080/api/report-sheet/${sheetSelected}`
+                `/api/report-sheet/${sheetSelected}`
               );
 
               report[0].map((rep) => {

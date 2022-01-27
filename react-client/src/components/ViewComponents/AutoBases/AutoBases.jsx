@@ -14,16 +14,13 @@ function AutoBases({ funcRequest }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function loadAutoBases() {
-    const autoBases = await funcRequest("http://localhost:8080/api/autobase/");
+    const autoBases = await funcRequest("/api/autobase/");
 
     setAutoBases(autoBases);
   }
 
   async function deleteAutoBase(AutoBase) {
-    const message = await funcRequest(
-      `http://localhost:8080/api/autobase/${AutoBase.ID}`,
-      "DELETE"
-    );
+    const message = await funcRequest(`/api/autobase/${AutoBase.ID}`, "DELETE");
 
     window.alert(message);
 
@@ -123,7 +120,7 @@ function AutoBases({ funcRequest }) {
                 setInputNameAutoBase("");
 
                 const message = await funcRequest(
-                  `http://localhost:8080/api/autobase/`,
+                  `/api/autobase/`,
                   "PUT",
                   tempChanged
                 );
@@ -159,13 +156,9 @@ function AutoBases({ funcRequest }) {
         <button
           className="button-modify"
           onClick={async () => {
-            const message = await funcRequest(
-              `http://localhost:8080/api/autobase/`,
-              "POST",
-              {
-                Name: createNameAutoBase,
-              }
-            );
+            const message = await funcRequest(`/api/autobase/`, "POST", {
+              Name: createNameAutoBase,
+            });
 
             setCreateNameAutoBase("");
 

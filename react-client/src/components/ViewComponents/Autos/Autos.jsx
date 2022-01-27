@@ -18,22 +18,17 @@ function Autos({ funcRequest }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function loadVehicles() {
-    const vehicles = await funcRequest(`http://localhost:8080/api/vehicle/`);
+    const vehicles = await funcRequest(`/api/vehicle/`);
 
     setVehicles(vehicles);
 
-    const autoGarages = await funcRequest(
-      `http://localhost:8080/api/autogarage/`
-    );
+    const autoGarages = await funcRequest(`/api/autogarage/`);
 
     setAutoGarages(autoGarages);
   }
 
   async function deleteVehicle(veh = null) {
-    const message = await funcRequest(
-      `http://localhost:8080/api/vehicle/${veh.ID}`,
-      "DELETE"
-    );
+    const message = await funcRequest(`/api/vehicle/${veh.ID}`, "DELETE");
 
     window.alert(message);
 
@@ -194,7 +189,7 @@ function Autos({ funcRequest }) {
               className="button-modify"
               onClick={async () => {
                 const message = await funcRequest(
-                  `http://localhost:8080/api/vehicle/`,
+                  `/api/vehicle/`,
                   `PUT`,
                   inputObjectVehicle
                 );
@@ -282,7 +277,7 @@ function Autos({ funcRequest }) {
           className="button-modify"
           onClick={async () => {
             const message = await funcRequest(
-              `http://localhost:8080/api/vehicle/`,
+              `/api/vehicle/`,
               "POST",
               createVehicle
             );

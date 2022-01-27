@@ -18,20 +18,17 @@ function Workers({ funcRequest }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function loadWorkers() {
-    const workers = await funcRequest(`http://localhost:8080/api/worker/`);
+    const workers = await funcRequest(`/api/worker/`);
 
     setWorkers(workers);
 
-    const autoBases = await funcRequest(`http://localhost:8080/api/autobase/`);
+    const autoBases = await funcRequest(`/api/autobase/`);
 
     setAutoBases(autoBases);
   }
 
   async function deleteWorker(worker) {
-    const message = await funcRequest(
-      `http://localhost:8080/api/worker/${worker.ID}`,
-      "DELETE"
-    );
+    const message = await funcRequest(`/api/worker/${worker.ID}`, "DELETE");
 
     window.alert(message);
 
@@ -207,7 +204,7 @@ function Workers({ funcRequest }) {
               className="button-modify"
               onClick={async () => {
                 const message = await funcRequest(
-                  `http://localhost:8080/api/worker/`,
+                  `/api/worker/`,
                   `PUT`,
                   inputObjectWorker
                 );
@@ -299,7 +296,7 @@ function Workers({ funcRequest }) {
           className="button-modify"
           onClick={async () => {
             const message = await funcRequest(
-              `http://localhost:8080/api/worker/`,
+              `/api/worker/`,
               "POST",
               createWorker
             );

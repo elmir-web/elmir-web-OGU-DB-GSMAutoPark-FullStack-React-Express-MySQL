@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
+import CONFIG from "./../../CONFIG.json";
+
 import "./MainContent.scss";
 
 import AutoBases from "./../ViewComponents/AutoBases/AutoBases";
@@ -23,7 +25,7 @@ const funcRequest = async (url, method = "GET", data = null) => {
       body = JSON.stringify(data);
     }
 
-    const responseFetch = await fetch(url, {
+    const responseFetch = await fetch(`${CONFIG.URL_BACKEND}${url}`, {
       method: method,
       headers: headers,
       body: body,

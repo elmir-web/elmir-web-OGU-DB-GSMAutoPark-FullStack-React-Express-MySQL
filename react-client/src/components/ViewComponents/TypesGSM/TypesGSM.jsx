@@ -16,16 +16,13 @@ function TypesGSM({ funcRequest }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function loadTypesGSM() {
-    const gsm = await funcRequest("http://localhost:8080/api/type-gsm/");
+    const gsm = await funcRequest("/api/type-gsm/");
 
     setTypesGSM(gsm);
   }
 
   async function deleteTypeGSM(itemGsm = null) {
-    const message = await funcRequest(
-      `http://localhost:8080/api/type-gsm/${itemGsm.ID}`,
-      "DELETE"
-    );
+    const message = await funcRequest(`/api/type-gsm/${itemGsm.ID}`, "DELETE");
 
     window.alert(message);
 
@@ -147,7 +144,7 @@ function TypesGSM({ funcRequest }) {
               className="button-modify"
               onClick={async () => {
                 const message = await funcRequest(
-                  `http://localhost:8080/api/type-gsm/`,
+                  `/api/type-gsm/`,
                   "PUT",
                   inputObjectGSM
                 );
@@ -206,7 +203,7 @@ function TypesGSM({ funcRequest }) {
           className="button-modify"
           onClick={async () => {
             const message = await funcRequest(
-              `http://localhost:8080/api/type-gsm/`,
+              `/api/type-gsm/`,
               "POST",
               createObjectGSM
             );

@@ -24,19 +24,19 @@ function Records({ funcRequest }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function loadRecords() {
-    const records = await funcRequest(`http://localhost:8080/api/record/`);
+    const records = await funcRequest(`/api/record/`);
 
     setRecords(records);
 
-    const sheets = await funcRequest(`http://localhost:8080/api/sheet/`);
+    const sheets = await funcRequest(`/api/sheet/`);
 
     setSheets(sheets);
 
-    const vehicles = await funcRequest(`http://localhost:8080/api/vehicle/`);
+    const vehicles = await funcRequest(`/api/vehicle/`);
 
     setVehicles(vehicles);
 
-    let workers = await funcRequest(`http://localhost:8080/api/worker/`);
+    let workers = await funcRequest(`/api/worker/`);
 
     workers = workers.filter((worker) => {
       return worker.Function === 1;
@@ -44,16 +44,13 @@ function Records({ funcRequest }) {
 
     setWorkers(workers);
 
-    const typesGSM = await funcRequest(`http://localhost:8080/api/type-gsm/`);
+    const typesGSM = await funcRequest(`/api/type-gsm/`);
 
     setTypesGSM(typesGSM);
   }
 
   async function deleteRecord(record) {
-    const message = await funcRequest(
-      `http://localhost:8080/api/record/${record.ID}`,
-      "DELETE"
-    );
+    const message = await funcRequest(`/api/record/${record.ID}`, "DELETE");
 
     window.alert(message);
 
@@ -314,7 +311,7 @@ function Records({ funcRequest }) {
               className="button-modify"
               onClick={async () => {
                 const message = await funcRequest(
-                  `http://localhost:8080/api/record/`,
+                  `/api/record/`,
                   `PUT`,
                   inputObjectRecord
                 );
@@ -490,7 +487,7 @@ function Records({ funcRequest }) {
           className="button-modify"
           onClick={async () => {
             const message = await funcRequest(
-              `http://localhost:8080/api/record/`,
+              `/api/record/`,
               "POST",
               createRecord
             );

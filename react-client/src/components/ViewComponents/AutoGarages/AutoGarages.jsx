@@ -17,20 +17,18 @@ function AutoGarages({ funcRequest }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function loadAutoGarages() {
-    const autoGarages = await funcRequest(
-      `http://localhost:8080/api/autogarage/`
-    );
+    const autoGarages = await funcRequest(`/api/autogarage/`);
 
     setAutoGarages(autoGarages);
 
-    const autoBases = await funcRequest(`http://localhost:8080/api/autobase/`);
+    const autoBases = await funcRequest(`/api/autobase/`);
 
     setAutoBases(autoBases);
   }
 
   async function deleteAutoGarage(autogarage = null) {
     const message = await funcRequest(
-      `http://localhost:8080/api/autogarage/${autogarage.ID}`,
+      `/api/autogarage/${autogarage.ID}`,
       "DELETE"
     );
 
@@ -175,7 +173,7 @@ function AutoGarages({ funcRequest }) {
               className="button-modify"
               onClick={async () => {
                 const message = await funcRequest(
-                  `http://localhost:8080/api/autogarage/`,
+                  `/api/autogarage/`,
                   `PUT`,
                   inputObjectAutoGarage
                 );
@@ -243,7 +241,7 @@ function AutoGarages({ funcRequest }) {
           className="button-modify"
           onClick={async () => {
             const message = await funcRequest(
-              `http://localhost:8080/api/autogarage/`,
+              `/api/autogarage/`,
               "POST",
               createAutoBase
             );

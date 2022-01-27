@@ -22,17 +22,15 @@ function Sheets({ funcRequest }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function loadSheets() {
-    const sheets = await funcRequest(`http://localhost:8080/api/sheet/`);
+    const sheets = await funcRequest(`/api/sheet/`);
 
     setSheets(sheets);
 
-    const autoGarages = await funcRequest(
-      `http://localhost:8080/api/autogarage/`
-    );
+    const autoGarages = await funcRequest(`/api/autogarage/`);
 
     setAutoGarages(autoGarages);
 
-    let workers = await funcRequest(`http://localhost:8080/api/worker/`);
+    let workers = await funcRequest(`/api/worker/`);
 
     workers = workers.filter((worker) => {
       return worker.Function === 2;
@@ -42,10 +40,7 @@ function Sheets({ funcRequest }) {
   }
 
   async function deleteSheet(sheet) {
-    const message = await funcRequest(
-      `http://localhost:8080/api/sheet/${sheet.ID}`,
-      "DELETE"
-    );
+    const message = await funcRequest(`/api/sheet/${sheet.ID}`, "DELETE");
 
     window.alert(message);
 
@@ -238,7 +233,7 @@ function Sheets({ funcRequest }) {
               className="button-modify"
               onClick={async () => {
                 const message = await funcRequest(
-                  `http://localhost:8080/api/sheet/`,
+                  `/api/sheet/`,
                   `PUT`,
                   inputObjectSheet
                 );
@@ -356,7 +351,7 @@ function Sheets({ funcRequest }) {
           className="button-modify"
           onClick={async () => {
             const message = await funcRequest(
-              `http://localhost:8080/api/sheet/`,
+              `/api/sheet/`,
               "POST",
               createSheet
             );
