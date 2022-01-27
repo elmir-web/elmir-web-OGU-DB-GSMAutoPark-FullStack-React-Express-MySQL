@@ -4,8 +4,11 @@ let cors = require("cors");
 require("dotenv").config();
 let axios = require("axios");
 
-const PORT = process.env.PORT || 8080;
 const app = express();
+
+const URL_THIS_SERVER = process.env.URL_SRV || `http://localhost`;
+const PORT = process.env.PORT || 8080;
+const config = require("./MySQLConfig.json");
 
 const autoBaseRouter = require("./routes/autobase.router");
 const typesGSMrouter = require("./routes/typesGSM.router");
@@ -21,7 +24,7 @@ global.funcRequest = async (url, method = "GET", data = null) => {
     let response;
 
     if (method === "GET") {
-      response = await axios.get(url);
+      response = await axios.get(`${URL_THIS_SERVER}:${PORT}${url}`);
     }
 
     return response.data;
@@ -31,18 +34,13 @@ global.funcRequest = async (url, method = "GET", data = null) => {
   return 554;
 };
 
-const config = {
-  // elmir: mysql config
-  host: "localhost",
-  user: "root",
-  database: "gsm",
-  password: "root",
-};
-
 app.listen(PORT, async () => {
   global.connectMySQL = await mysql.createPool(config);
 
-  console.log(`Сервер запущен по адресу: "http://localhost:${PORT}"`);
+  let [test] = await global.connectMySQL.execute(`select * from gsm`);
+  console.log(test);
+
+  console.log(`Сервер запущен на порту ${PORT}`);
 });
 
 global.connectMySQL = null;

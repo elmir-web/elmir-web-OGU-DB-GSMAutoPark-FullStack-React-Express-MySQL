@@ -19,19 +19,19 @@ class RecordController {
 
     for (let index = 0; index < rowsAllRecords.length; index++) {
       rowsAllRecords[index].IDsheet = await global.funcRequest(
-        `http://localhost:8080/api/sheet/${rowsAllRecords[index].IDsheet}`
+        `/api/sheet/${rowsAllRecords[index].IDsheet}`
       );
 
       rowsAllRecords[index].IDcar = await global.funcRequest(
-        `http://localhost:8080/api/vehicle/${rowsAllRecords[index].IDcar}`
+        `/api/vehicle/${rowsAllRecords[index].IDcar}`
       );
 
       rowsAllRecords[index].IDdriver = await global.funcRequest(
-        `http://localhost:8080/api/worker/${rowsAllRecords[index].IDdriver}`
+        `/api/worker/${rowsAllRecords[index].IDdriver}`
       );
 
       rowsAllRecords[index].IDgsm = await global.funcRequest(
-        `http://localhost:8080/api/type-gsm/${rowsAllRecords[index].IDgsm}`
+        `/api/type-gsm/${rowsAllRecords[index].IDgsm}`
       );
     }
 
@@ -46,19 +46,19 @@ class RecordController {
     );
 
     rowsAllRecords[0].IDsheet = await global.funcRequest(
-      `http://localhost:8080/api/sheet/${rowsAllRecords[0].IDsheet}`
+      `/api/sheet/${rowsAllRecords[0].IDsheet}`
     );
 
     rowsAllRecords[0].IDcar = await global.funcRequest(
-      `http://localhost:8080/api/vehicle/${rowsAllRecords[0].IDcar}`
+      `/api/vehicle/${rowsAllRecords[0].IDcar}`
     );
 
     rowsAllRecords[0].IDdriver = await global.funcRequest(
-      `http://localhost:8080/api/worker/${rowsAllRecords[0].IDdriver}`
+      `/api/worker/${rowsAllRecords[0].IDdriver}`
     );
 
     rowsAllRecords[0].IDgsm = await global.funcRequest(
-      `http://localhost:8080/api/type-gsm/${rowsAllRecords[0].IDgsm}`
+      `/api/type-gsm/${rowsAllRecords[0].IDgsm}`
     );
 
     res.json(rowsAllRecords[0]);

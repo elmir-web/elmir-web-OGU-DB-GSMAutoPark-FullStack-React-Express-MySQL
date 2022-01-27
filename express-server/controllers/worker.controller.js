@@ -21,7 +21,7 @@ class WorkerController {
 
     for (let index = 0; index < rowsAllWorkers.length; index++) {
       rowsAllWorkers[index].IDbase = await global.funcRequest(
-        `http://localhost:8080/api/autobase/${rowsAllWorkers[index].IDbase}`
+        `/api/autobase/${rowsAllWorkers[index].IDbase}`
       );
     }
 
@@ -36,7 +36,7 @@ class WorkerController {
     );
 
     rowsAllWorkers[0].IDbase = await global.funcRequest(
-      `http://localhost:8080/api/autobase/${rowsAllWorkers[0].IDbase}`
+      `/api/autobase/${rowsAllWorkers[0].IDbase}`
     );
 
     res.json(rowsAllWorkers[0]);

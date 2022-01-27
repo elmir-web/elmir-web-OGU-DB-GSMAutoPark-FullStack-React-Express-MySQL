@@ -21,7 +21,7 @@ class AutoGarageController {
 
     for (let index = 0; index < rowsAllAutoGarages.length; index++) {
       rowsAllAutoGarages[index].IDbase = await global.funcRequest(
-        `http://localhost:8080/api/autobase/${rowsAllAutoGarages[index].IDbase}`
+        `/api/autobase/${rowsAllAutoGarages[index].IDbase}`
       );
     }
 
@@ -37,7 +37,7 @@ class AutoGarageController {
     );
 
     rowsAllAutoGarages[0].IDbase = await global.funcRequest(
-      `http://localhost:8080/api/autobase/${rowsAllAutoGarages[0].IDbase}`
+      `/api/autobase/${rowsAllAutoGarages[0].IDbase}`
     );
 
     res.json(rowsAllAutoGarages[0]);

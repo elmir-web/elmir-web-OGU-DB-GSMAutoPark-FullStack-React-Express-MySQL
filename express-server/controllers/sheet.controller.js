@@ -26,11 +26,11 @@ class SheetController {
       ).format("YYYY-MM-DD");
 
       rowsAllSheets[index].IDgarage = await global.funcRequest(
-        `http://localhost:8080/api/autogarage/${rowsAllSheets[index].IDgarage}`
+        `/api/autogarage/${rowsAllSheets[index].IDgarage}`
       );
 
       rowsAllSheets[index].IDsigner = await global.funcRequest(
-        `http://localhost:8080/api/worker/${rowsAllSheets[index].IDsigner}`
+        `/api/worker/${rowsAllSheets[index].IDsigner}`
       );
     }
 
@@ -49,11 +49,11 @@ class SheetController {
     );
 
     rowsAllSheets[0].IDgarage = await global.funcRequest(
-      `http://localhost:8080/api/autogarage/${rowsAllSheets[0].IDgarage}`
+      `/api/autogarage/${rowsAllSheets[0].IDgarage}`
     );
 
     rowsAllSheets[0].IDsigner = await global.funcRequest(
-      `http://localhost:8080/api/worker/${rowsAllSheets[0].IDsigner}`
+      `/api/worker/${rowsAllSheets[0].IDsigner}`
     );
 
     res.json(rowsAllSheets[0]);

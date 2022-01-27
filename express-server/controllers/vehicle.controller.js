@@ -18,7 +18,7 @@ class VehicleController {
 
     for (let index = 0; index < rowsAllVeh.length; index++) {
       rowsAllVeh[index].IDgarage = await global.funcRequest(
-        `http://localhost:8080/api/autogarage/${rowsAllVeh[index].IDgarage}`
+        `/api/autogarage/${rowsAllVeh[index].IDgarage}`
       );
     }
 
@@ -33,7 +33,7 @@ class VehicleController {
     );
 
     rowsAllVeh[0].IDgarage = await global.funcRequest(
-      `http://localhost:8080/api/autogarage/${rowsAllVeh[0].IDgarage}`
+      `/api/autogarage/${rowsAllVeh[0].IDgarage}`
     );
 
     res.json(rowsAllVeh[0]);

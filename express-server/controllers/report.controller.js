@@ -1,9 +1,7 @@
 // методы (контроллеры)
 class ReportController {
   async getGSMDayGarage(req, res) {
-    let tempSheets = await global.funcRequest(
-      `http://localhost:8080/api/sheet/`
-    );
+    let tempSheets = await global.funcRequest(`/api/sheet/`);
 
     for (let index = 0; index < tempSheets.length; index++) {
       delete tempSheets[index].ID;
@@ -16,9 +14,7 @@ class ReportController {
 
     let returnJSON = { Dates: [...tempSheets] };
 
-    let tempGarages = await global.funcRequest(
-      `http://localhost:8080/api/autogarage/`
-    );
+    let tempGarages = await global.funcRequest(`/api/autogarage/`);
 
     for (let index = 0; index < tempGarages.length; index++) {
       delete tempGarages[index].IDbase;
@@ -32,9 +28,7 @@ class ReportController {
   async getSheetsToGarage(req, res) {
     const idGarage = Number(req.params.id);
 
-    let tempSheets = await global.funcRequest(
-      `http://localhost:8080/api/sheet/`
-    );
+    let tempSheets = await global.funcRequest(`/api/sheet/`);
 
     let newSheets = [];
 
