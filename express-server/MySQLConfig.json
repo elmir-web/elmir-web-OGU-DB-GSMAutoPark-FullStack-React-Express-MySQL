@@ -1,6 +1,6 @@
 {
-  "host": "ogu-db-test-elmir.lh1.in",
-  "user": "uslfsbws_elmir",
-  "database": "uslfsbws_gsm",
-  "password": "12345"
+  "host": "23.111.121.178",
+  "user": "elmir-web",
+  "database": "gsm",
+  "password": "elmir-web"
 }
