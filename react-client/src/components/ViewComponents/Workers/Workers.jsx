@@ -9,6 +9,8 @@ function Workers({ funcRequest }) {
   let [inputObjectWorker, setInputObjectWorker] = useState({
     ID: null,
     FIO: "",
+    loginUser: "",
+    passwordUser: "",
     Function: null,
     IDbase: null,
   });
@@ -41,9 +43,11 @@ function Workers({ funcRequest }) {
 
       setInputObjectWorker({
         ID: null,
-        FIO: "",
-        Function: null,
-        IDbase: null,
+        FIO: worker.FIO,
+        loginUser: worker.loginUser,
+        passwordUser: worker.passwordUser,
+        Function: worker.Function,
+        IDbase: worker.IDbase,
       });
     } else if (
       changedWorker !== null &&
@@ -54,13 +58,29 @@ function Workers({ funcRequest }) {
 
       setInputObjectWorker({
         ID: null,
-        FIO: "",
-        Function: null,
-        IDbase: null,
+        FIO: worker.FIO,
+        loginUser: worker.loginUser,
+        passwordUser: worker.passwordUser,
+        Function: worker.Function,
+        IDbase: worker.IDbase,
       });
     } else {
       setChangedWorker(null);
     }
+  }
+
+  function getFunctionStatusWorker(FunctionID) {
+    if (FunctionID === 0) return "Кандидат";
+    else if (FunctionID === 1) return "Водитель";
+    else if (FunctionID === 2) return "Подписант";
+    else if (FunctionID === 3) return "Админ";
+  }
+
+  function getIDToWorkerStatus(functionName) {
+    if (functionName === "Кандидат") return 0;
+    else if (functionName === "Водитель") return 1;
+    else if (functionName === "Подписант") return 2;
+    else if (functionName === "Админ") return 3;
   }
 
   return (
@@ -73,6 +93,8 @@ function Workers({ funcRequest }) {
             <tr>
               <th>ID сотрудника</th>
               <th>ФИО</th>
+              <th>Логин</th>
+              <th>Пароль</th>
               <th>Должность</th>
               <th>Автобаза (ID)</th>
               <th>Действия</th>
@@ -85,8 +107,14 @@ function Workers({ funcRequest }) {
                   <tr key={worker.ID}>
                     <td>{worker.ID}</td>
                     <td>{worker.FIO}</td>
+                    <td>{worker.loginUser}</td>
                     <td>
-                      {worker.Function === 1 ? "Водитель" : "Подписант"} (
+                      {worker.passwordUser.length === 0
+                        ? "Не установлен"
+                        : "Пароль установлен"}
+                    </td>
+                    <td>
+                      {getFunctionStatusWorker(worker.Function)} (
                       {worker.Function})
                     </td>
                     <td>
@@ -127,13 +155,13 @@ function Workers({ funcRequest }) {
           <div>
             <h4>
               Редактирование сотрудника {changedWorker.FIO} :{" "}
-              {changedWorker.Function === 1 ? "Водитель" : "Подписант"} :{" "}
+              {getFunctionStatusWorker(changedWorker.Function)} :{" "}
               {changedWorker.IDbase.ID}
             </h4>
 
             <input
               className="input-write"
-              value={inputObjectWorker.Name}
+              value={inputObjectWorker.FIO}
               onChange={(e) => {
                 setInputObjectWorker({
                   ...inputObjectWorker,
@@ -145,16 +173,44 @@ function Workers({ funcRequest }) {
               placeholder="Введите ФИО сотрудника"
             />
 
+            <input
+              className="input-write"
+              value={inputObjectWorker.loginUser}
+              onChange={(e) => {
+                setInputObjectWorker({
+                  ...inputObjectWorker,
+                  ID: changedWorker.ID,
+                  loginUser: e.target.value,
+                });
+              }}
+              type="text"
+              placeholder="Введите логин сотрудника"
+            />
+
+            <input
+              className="input-write"
+              value={inputObjectWorker.passwordUser}
+              onChange={(e) => {
+                setInputObjectWorker({
+                  ...inputObjectWorker,
+                  ID: changedWorker.ID,
+                  passwordUser: e.target.value,
+                });
+              }}
+              type="text"
+              placeholder="Введите пароль сотрудника"
+            />
+
             <select
               className="input-select"
               size="1"
               onChange={(e) => {
-                if (e.target.value === "Выберите должность") {
+                if (e.target.value.indexOf("Выберите должность") !== -1) {
                   window.alert("Ошибка: Выберите варианты ниже");
                   return;
                 }
 
-                let tempFunction = e.target.value === "Водитель" ? 1 : 2;
+                let tempFunction = getIDToWorkerStatus(e.target.value);
 
                 let tempThisWorker = {
                   ...inputObjectWorker,
@@ -165,16 +221,21 @@ function Workers({ funcRequest }) {
                 setInputObjectWorker(tempThisWorker);
               }}
             >
-              <option>Выберите должность</option>
+              <option>
+                Выберите должность (Текущая должность:{" "}
+                {getFunctionStatusWorker(inputObjectWorker.Function)})
+              </option>
+              <option>Кандидат</option>
               <option>Водитель</option>
               <option>Подписант</option>
+              <option>Админ</option>
             </select>
 
             <select
               className="input-select"
               size="1"
               onChange={(e) => {
-                if (e.target.value === "Выберите автобазу") {
+                if (e.target.value.indexOf("Выберите автобазу") !== -1) {
                   window.alert("Ошибка: Выберите варианты ниже");
                   return;
                 }
@@ -190,7 +251,10 @@ function Workers({ funcRequest }) {
                 setInputObjectWorker(tempThisWorker);
               }}
             >
-              <option>Выберите автобазу</option>
+              <option>
+                Выберите автобазу (Текущая автобаза:{" "}
+                {inputObjectWorker.IDbase.Name} )
+              </option>
               {allAutoBases.map((autobase) => {
                 return (
                   <option key={autobase.ID} value={autobase.ID}>
@@ -203,16 +267,24 @@ function Workers({ funcRequest }) {
             <button
               className="button-modify"
               onClick={async () => {
+                let changedThisWorker = {
+                  ...inputObjectWorker,
+                  ID: changedWorker.ID,
+                  IDbase: inputObjectWorker.IDbase.ID,
+                };
+
                 const message = await funcRequest(
                   `/api/worker/`,
                   `PUT`,
-                  inputObjectWorker
+                  changedThisWorker
                 );
 
                 setChangedWorker(null);
                 setInputObjectWorker({
                   ID: null,
                   FIO: "",
+                  loginUser: "",
+                  passwordUser: "",
                   Function: null,
                   IDbase: null,
                 });
@@ -234,9 +306,13 @@ function Workers({ funcRequest }) {
         <h4>
           Создать сотрудника{" "}
           {createWorker !== null
-            ? ` - ФИО: ${createWorker.FIO} Должность: ${
-                createWorker.Function === 1 ? "Водитель" : "Подписант"
-              } ID автобазы: ${createWorker.IDbase}`
+            ? ` - ФИО: ${createWorker.FIO} Логин: ${
+                createWorker.loginUser
+              } Пароль: ${
+                createWorker.passwordUser
+              } Должность: ${getFunctionStatusWorker(
+                createWorker.Function
+              )} ID автобазы: ${createWorker.IDbase}`
             : ""}
         </h4>
 
@@ -249,35 +325,63 @@ function Workers({ funcRequest }) {
           placeholder="Введите ФИО сотрудника"
         />
 
+        <input
+          className="input-write"
+          onChange={(e) => {
+            setCreateWorker({ ...createWorker, loginUser: e.target.value });
+          }}
+          type="text"
+          placeholder="Введите логин сотрудника"
+        />
+
+        <input
+          className="input-write"
+          onChange={(e) => {
+            setCreateWorker({ ...createWorker, passwordUser: e.target.value });
+          }}
+          type="text"
+          placeholder="Введите пароль сотрудника"
+        />
+
         <select
           className="input-select"
           size="1"
           onChange={(e) => {
+            let tempFunction = null;
+
             if (e.target.value === "Выберите должность") {
               window.alert("Ошибка: Выберите варианты ниже");
+
+              setCreateWorker({ ...createWorker, Function: tempFunction });
               return;
             }
 
-            let tempFunction = e.target.value === "Водитель" ? 1 : 2;
+            tempFunction = getIDToWorkerStatus(e.target.value);
 
             setCreateWorker({ ...createWorker, Function: tempFunction });
           }}
         >
           <option>Выберите должность</option>
+          <option>Кандидат</option>
           <option>Водитель</option>
           <option>Подписант</option>
+          <option>Админ</option>
         </select>
 
         <select
           className="input-select"
           size="1"
           onChange={(e) => {
+            let tempAutoBase = null;
+
             if (e.target.value === "Выберите автобазу") {
               window.alert("Ошибка: Выберите варианты ниже");
+
+              setCreateWorker({ ...createWorker, IDbase: tempAutoBase });
               return;
             }
 
-            let tempAutoBase = e.target.value;
+            tempAutoBase = e.target.value;
 
             setCreateWorker({ ...createWorker, IDbase: tempAutoBase });
           }}
@@ -295,6 +399,58 @@ function Workers({ funcRequest }) {
         <button
           className="button-modify"
           onClick={async () => {
+            if (createWorker === null) {
+              window.alert("Ошибка: Вы ничего не сделали");
+              return;
+            }
+
+            if (
+              createWorker.FIO === `` ||
+              createWorker.FIO === undefined ||
+              createWorker.FIO === null
+            ) {
+              window.alert("Ошибка: Не ведены фамилия, имя и отчество");
+              return;
+            }
+
+            if (
+              createWorker.loginUser === `` ||
+              createWorker.loginUser === undefined ||
+              createWorker.loginUser === null
+            ) {
+              window.alert("Ошибка: Не веден логин");
+              return;
+            }
+
+            if (
+              createWorker.passwordUser === `` ||
+              createWorker.passwordUser === undefined ||
+              createWorker.passwordUser === null
+            ) {
+              window.alert("Ошибка: Не веден пароль");
+              return;
+            }
+
+            if (
+              createWorker.Function === `` ||
+              createWorker.Function === undefined ||
+              createWorker.Function === null ||
+              createWorker.Function === "Выберите должность"
+            ) {
+              window.alert("Ошибка: Не выбрана должность");
+              return;
+            }
+
+            if (
+              createWorker.IDbase === `` ||
+              createWorker.IDbase === undefined ||
+              createWorker.IDbase === null ||
+              createWorker.IDbase === "Выберите автобазу"
+            ) {
+              window.alert("Ошибка: Не выбрана автобаза");
+              return;
+            }
+
             const message = await funcRequest(
               `/api/worker/`,
               "POST",

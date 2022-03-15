@@ -1,6 +1,6 @@
 {
-  "host": "23.111.121.178",
-  "user": "elmir-vds",
+  "host": "127.0.0.1",
+  "user": "root",
   "database": "gsm",
-  "password": "elmir-vds"
+  "password": "root"
 }

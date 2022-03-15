@@ -3,14 +3,14 @@ let axios = require("axios");
 // методы (контроллеры)
 class WorkerController {
   async createWorker(req, res) {
-    const { FIO, Function, IDbase } = req.body;
+    const { FIO, loginUser, passwordUser, Function, IDbase } = req.body;
 
     await global.connectMySQL.execute(
-      `INSERT INTO worker (FIO, worker.Function, IDbase) VALUES ('${FIO}', '${Function}', '${IDbase}')`
+      `INSERT INTO worker (FIO, loginUser, passwordUser, worker.Function, IDbase) VALUES ('${FIO}', '${loginUser}', '${passwordUser}', '${Function}', '${IDbase}')`
     );
 
     res.json(
-      `Сотрудник (ФИО: "${FIO}", Номер должности: "${Function}", ID автобазы: "${IDbase}") создан.`
+      `Сотрудник (ФИО: "${FIO}", Логин: "${loginUser}", Пароль: "${passwordUser}", Номер должности: "${Function}", ID автобазы: "${IDbase}") создан.`
     );
   }
 
@@ -43,17 +43,17 @@ class WorkerController {
   }
 
   async updateWorker(req, res) {
-    const { ID, FIO, Function, IDbase } = req.body;
+    const { ID, FIO, loginUser, passwordUser, Function, IDbase } = req.body;
 
     const [rowsUpdatedWorker] = await global.connectMySQL.execute(
-      `UPDATE worker SET FIO = '${FIO}', worker.Function = '${Function}', IDbase = '${IDbase}' WHERE ID = ${ID}`
+      `UPDATE worker SET FIO = '${FIO}', loginUser = '${loginUser}', passwordUser = '${passwordUser}', worker.Function = '${Function}', IDbase = '${IDbase}' WHERE ID = ${ID}`
     );
 
     if (rowsUpdatedWorker["affectedRows"])
       res.json(
-        `Сотрудник (ID: ${ID} ФИО: "${FIO}", Номер должности: "${Function}", ID автобазы: "${IDbase}") изменен`
+        `Сотрудник (ID: ${ID} ФИО: "${FIO}", Логин: "${loginUser}", Пароль: "${passwordUser}", Номер должности: "${Function}", ID автобазы: "${IDbase}") изменен`
       );
-    else res.json(`Гараж с ID: ${ID} не изменен`);
+    else res.json(`Сотрудник с ID: ${ID} не изменен`);
   }
 
   async deleteWorker(req, res) {

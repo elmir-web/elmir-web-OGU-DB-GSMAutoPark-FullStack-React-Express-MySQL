@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require("express"); // 1. импортируем express
 const mysql = require("mysql2/promise");
 let cors = require("cors");
 require("dotenv").config();
 let axios = require("axios");
 
-const app = express();
+const app = express(); // 2. создаем наше приложение
 
 const URL_THIS_SERVER = process.env.URL_SRV || `http://localhost`;
 const PORT = process.env.PORT || 8080;
@@ -18,6 +18,7 @@ const workersRouter = require("./routes/worker.router");
 const sheetRouter = require("./routes/sheet.router");
 const recordRouter = require("./routes/record.router");
 const reportRouter = require("./routes/report.router");
+const accountRouter = require("./routes/account.router");
 
 global.funcRequest = async (url, method = "GET", data = null) => {
   try {
@@ -34,6 +35,7 @@ global.funcRequest = async (url, method = "GET", data = null) => {
   return 554;
 };
 
+// 3. запускаем наше приложение на порту
 app.listen(PORT, async () => {
   global.connectMySQL = await mysql.createPool(config);
 
@@ -55,3 +57,4 @@ app.use("/api", workersRouter);
 app.use("/api", sheetRouter);
 app.use("/api", recordRouter);
 app.use("/api", reportRouter);
+app.use("/account", accountRouter); // 4. слушаем апи для работы с аккаунтами
