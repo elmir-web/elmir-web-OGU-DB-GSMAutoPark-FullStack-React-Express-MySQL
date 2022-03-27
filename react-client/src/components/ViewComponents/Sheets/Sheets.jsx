@@ -136,7 +136,6 @@ function Sheets({ funcRequest }) {
           </tbody>
         </table>
       </div>
-      {/*  */}
 
       <div className="changed-wrapper">
         {changedSheet !== null ? (
